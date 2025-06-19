@@ -1,8 +1,8 @@
 ﻿{
 	"name": "FixYesChef",
 	"version_number": "1.0.0",
-	"website_url": "",
-	"description": "Template",
+	"website_url": "https://github.com/Nuxlar/FixYesChef/issues",
+	"description": "Fixes Yes Chef's boosted Ice skill not removing other boosted skills.",
 	"dependencies": [
 		"bbepis-BepInExPack-5.4.2117",
 		"RiskofThunder-HookGenPatcher-1.2.4"

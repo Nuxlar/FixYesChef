@@ -1,9 +1,6 @@
 using BepInEx;
-using RoR2.ContentManagement;
+using EntityStates.Chef;
 using System.Diagnostics;
-using System.IO;
-using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace FixYesChef
 {
@@ -25,31 +22,17 @@ namespace FixYesChef
       Stopwatch stopwatch = Stopwatch.StartNew();
 
       Log.Init(Logger);
-      // LoadAssets();
+
+      On.EntityStates.Chef.IceCube.OnEnter += ReplaceState;
 
       stopwatch.Stop();
       Log.Info_NoCallerPrefix($"Initialized in {stopwatch.Elapsed.TotalSeconds:F2} seconds");
     }
 
-    private static void LoadAssets()
+    private void ReplaceState(On.EntityStates.Chef.IceCube.orig_OnEnter orig, IceCube self)
     {
-      // Example for how to properly load in assets to be used later
-      // AssetAsyncReferenceManager<Material>.LoadAsset(new AssetReferenceT<Material>(RoR2BepInExPack.GameAssetPaths.RoR2_Base_moon.matMoonTerrain_mat)).Completed += (x) => variableName = x.Result;
+      self.outer.SetState(new IceBox());
     }
 
-    /*
-        private static void TweakAssets()
-        {
-          Example for how to edit an asset once it finishes loading
-          AssetAsyncReferenceManager<GameObject>.LoadAsset(new AssetReferenceT<Material>(RoR2BepInExPack.GameAssetPaths.RoR2_DLC2_Items_LowerPricedChests.PickupSaleStar_prefab)).Completed += delegate (AsyncOperationHandle<GameObject> obj)
-          {
-            MeshCollider collider = obj.Result.transform.find("SaleStar")?.GetComponent<MeshCollider>();
-            if (collider)
-            {
-              collider.convex = true;
-            }
-          };
-        }
-    */
   }
 }
